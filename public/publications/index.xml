@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publications on Vassileios Balntas</title>
+    <link>http://www.robots.ox.ac.uk/~balntas/publications/</link>
+    <description>Recent content in Publications on Vassileios Balntas</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.robots.ox.ac.uk/~balntas/publications/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pose Guided RGBD Feature Learning for 3D Object Pose Estimation</title>
+      <link>http://www.robots.ox.ac.uk/~balntas/publications/posefeatures2017iccv/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robots.ox.ac.uk/~balntas/publications/posefeatures2017iccv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HPatches: A Benchmark and Evaluation of Handcrafted and Learned Local Descriptors</title>
+      <link>http://www.robots.ox.ac.uk/~balntas/publications/hpatches2017cvpr/</link>
+      <pubDate>Wed, 15 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robots.ox.ac.uk/~balntas/publications/hpatches2017cvpr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Binary Online Learned Descriptors</title>
+      <link>http://www.robots.ox.ac.uk/~balntas/publications/bold2017pami/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robots.ox.ac.uk/~balntas/publications/bold2017pami/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning local feature descriptors with triplets and shallow convolutional neural networks</title>
+      <link>http://www.robots.ox.ac.uk/~balntas/publications/tfeat2016bmvc/</link>
+      <pubDate>Fri, 01 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robots.ox.ac.uk/~balntas/publications/tfeat2016bmvc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BOLD: Binary Online Learnt Descriptor For Efficient Image Matching</title>
+      <link>http://www.robots.ox.ac.uk/~balntas/publications/bold2015cvpr/</link>
+      <pubDate>Wed, 01 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robots.ox.ac.uk/~balntas/publications/bold2015cvpr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Improving Object Tracking with Voting from False Positive Detections</title>
+      <link>http://www.robots.ox.ac.uk/~balntas/publications/falsepositivestracking2014icpr/</link>
+      <pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robots.ox.ac.uk/~balntas/publications/falsepositivestracking2014icpr/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

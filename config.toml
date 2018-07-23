@@ -1,0 +1,63 @@
+baseurl             = "http://http://vbalnt.github.io/"
+canonifyurls        = true
+contentdir          = "content"
+languageCode        = "en-US"
+layoutdir           = "layouts"
+publishdir          = "public"
+theme               = "cocoa"
+author              = "Vassileios Balntas"
+title               = "Vassileios Balntas"
+pygmentsuseclasses  = true
+disqusshortname     = "vbalnt@github"
+pluralizelisttitles = false
+googleAnalytics     = "UA-62863910-5"
+
+[permalinks]
+blog  = "blog/:slug/"
+
+[[menu.main]]
+name                   = "Home"
+weight                 = -400
+identifier             = ""
+url                    = "/"
+
+
+[[menu.main]]
+name                   = "Publications"
+weight                 = -300
+identifier             = "publications"
+url                    = "/publications/"
+
+[[menu.main]]
+name                   = "About"
+weight                 = -200
+identifier             = "about"
+url                    = "/about/"
+
+
+[[menu.main]]
+name                   = "Posts"
+weight                 = -100
+identifier             = "posts"
+url                    = "/posts/"
+
+
+[params]
+latestpostscount       = 50                            
+i18n_flags             = false                        
+author                 = "Vassileios Balntas"
+cachebuster            = true                         
+dateform               = "Jan 2, 2006"
+dateformfull           = "Mon Jan 2 2006 15:04:05 MST"
+email                  = "balntas@robots.ox.ac.uk"
+extracssfiles          = [ "/css/override.css" ]       
+faviconfile            = "img/penrose.ico"
+github                 = "//github.com/vbalnt"
+noshowreadtime         = false                         
+scholar                = "//scholar.google.co.uk/citations?user=AGoNHcsAAAAJ&hl=en"
+highlightjs            = true
+avatar                 = "img/vas.jpg"
+
+
+[taxonomies]
+   tag = "tags"
