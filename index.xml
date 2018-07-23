@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vassileios Balntas</title>
+    <link>http://vbalnt.github.io/</link>
+    <description>Recent content on Vassileios Balntas</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 01 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://vbalnt.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pose Guided RGBD Feature Learning for 3D Object Pose Estimation</title>
+      <link>http://vbalnt.github.io/publications/posefeatures2017iccv/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/publications/posefeatures2017iccv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Moving to Active Vision Lab @ University of Oxford as a post-doc</title>
+      <link>http://vbalnt.github.io/news/move-oxford/</link>
+      <pubDate>Fri, 21 Jul 2017 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/move-oxford/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Project website for our CVPR 2017 HPatches paper is now online</title>
+      <link>http://vbalnt.github.io/news/hpatches-cvpr17/</link>
+      <pubDate>Sun, 21 May 2017 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/hpatches-cvpr17/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Paper about Pose guided 3D pose descriptors accepted at ICCV 2017</title>
+      <link>http://vbalnt.github.io/pdf/posefeatures2017iccv.pdf</link>
+      <pubDate>Fri, 21 Apr 2017 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/pdf/posefeatures2017iccv.pdf</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Talk about RGBD feature learning at BMVA technical meeting</title>
+      <link>http://vbalnt.github.io/pdf/pose-guided-bmva.pdf</link>
+      <pubDate>Tue, 21 Mar 2017 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/pdf/pose-guided-bmva.pdf</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HPatches: A Benchmark and Evaluation of Handcrafted and Learned Local Descriptors</title>
+      <link>http://vbalnt.github.io/publications/hpatches2017cvpr/</link>
+      <pubDate>Wed, 15 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/publications/hpatches2017cvpr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IEEE TPAMI paper on Binary Online Learned Descriptors accepted</title>
+      <link>http://vbalnt.github.io/pdf/bold2017pami.pdf</link>
+      <pubDate>Tue, 21 Feb 2017 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/pdf/bold2017pami.pdf</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Binary Online Learned Descriptors</title>
+      <link>http://vbalnt.github.io/publications/bold2017pami/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/publications/bold2017pami/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Awarded PhD degree</title>
+      <link>http://vbalnt.github.io/news/phd-award/</link>
+      <pubDate>Wed, 21 Dec 2016 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/phd-award/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning local feature descriptors with triplets and shallow convolutional neural networks</title>
+      <link>http://vbalnt.github.io/publications/tfeat2016bmvc/</link>
+      <pubDate>Fri, 01 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/publications/tfeat2016bmvc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Website for our ECCV 2016 feature descriptors workshop is now online</title>
+      <link>http://vbalnt.github.io/news/eccv-workshop/</link>
+      <pubDate>Sat, 21 May 2016 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/eccv-workshop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Code for our efficient TFeat descriptor from BMVC 2016 is now on github</title>
+      <link>http://vbalnt.github.io/news/tfeat-code16/</link>
+      <pubDate>Thu, 21 Jan 2016 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/tfeat-code16/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Code for our binary online learned descriptor from CVPR 2015 is now on github</title>
+      <link>http://vbalnt.github.io/news/bold-code/</link>
+      <pubDate>Tue, 21 Jul 2015 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/bold-code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BOLD: Binary Online Learnt Descriptor For Efficient Image Matching</title>
+      <link>http://vbalnt.github.io/publications/bold2015cvpr/</link>
+      <pubDate>Wed, 01 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/publications/bold2015cvpr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Improving Object Tracking with Voting from False Positive Detections</title>
+      <link>http://vbalnt.github.io/publications/falsepositivestracking2014icpr/</link>
+      <pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/publications/falsepositivestracking2014icpr/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

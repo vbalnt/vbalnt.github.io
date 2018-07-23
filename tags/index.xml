@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Vassileios Balntas</title>
+    <link>http://vbalnt.github.io/tags/</link>
+    <description>Recent content in Tags on Vassileios Balntas</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://vbalnt.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Computer Vision &amp; Machine Learning</title>
+      <link>http://vbalnt.github.io/tags/cvml/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/tags/cvml/</guid>
+      <description>Posts related to Computer Vision and Machine learning</description>
+    </item>
+    
+    <item>
+      <title>General</title>
+      <link>http://vbalnt.github.io/tags/general/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/tags/general/</guid>
+      <description>General posts</description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://vbalnt.github.io/tags/linux/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/tags/linux/</guid>
+      <description>Posts related to Linux 🐧</description>
+    </item>
+    
+    <item>
+      <title>Maths</title>
+      <link>http://vbalnt.github.io/tags/maths/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://vbalnt.github.io/tags/maths/</guid>
+      <description>Maths-related posts</description>
+    </item>
+    
+  </channel>
+</rss>
