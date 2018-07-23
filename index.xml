@@ -6,10 +6,28 @@
     <description>Recent content on Vassileios Balntas</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 01 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Jul 2018 04:05:25 -0600</lastBuildDate>
     
 	<atom:link href="http://vbalnt.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>I have moved to Scape Technologies as Research Team Lead</title>
+      <link>http://vbalnt.github.io/news/move_scape/</link>
+      <pubDate>Sat, 21 Jul 2018 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/move_scape/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Our RelocNet paper was accepted at ECCV 2018</title>
+      <link>http://vbalnt.github.io/news/camera_descriptors_eccv/</link>
+      <pubDate>Thu, 21 Jun 2018 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/camera_descriptors_eccv/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Pose Guided RGBD Feature Learning for 3D Object Pose Estimation</title>
@@ -21,9 +39,9 @@
     </item>
     
     <item>
-      <title>Moving to Active Vision Lab @ University of Oxford as a post-doc</title>
+      <title>I have moved to University of Oxford as a Post-Doc</title>
       <link>http://vbalnt.github.io/news/move-oxford/</link>
-      <pubDate>Fri, 21 Jul 2017 04:05:25 -0600</pubDate>
+      <pubDate>Wed, 21 Jun 2017 04:05:25 -0600</pubDate>
       
       <guid>http://vbalnt.github.io/news/move-oxford/</guid>
       <description></description>

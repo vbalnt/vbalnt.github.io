@@ -3,13 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://vbalnt.github.io/news/move_scape/</loc>
+    <lastmod>2018-07-21T04:05:25-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://vbalnt.github.io/news/camera_descriptors_eccv/</loc>
+    <lastmod>2018-06-21T04:05:25-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://vbalnt.github.io/publications/posefeatures2017iccv/</loc>
     <lastmod>2017-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://vbalnt.github.io/news/move-oxford/</loc>
-    <lastmod>2017-07-21T04:05:25-06:00</lastmod>
+    <lastmod>2017-06-21T04:05:25-06:00</lastmod>
   </url>
   
   <url>
@@ -98,6 +108,11 @@
   </url>
   
   <url>
+    <loc>http://vbalnt.github.io/scape/</loc>
+    <lastmod>2015-08-22T06:42:21-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://vbalnt.github.io/code/</loc>
     <lastmod>2015-08-19T20:29:37-07:00</lastmod>
   </url>
@@ -119,7 +134,7 @@
   
   <url>
     <loc>http://vbalnt.github.io/news/</loc>
-    <lastmod>2017-07-21T04:05:25-06:00</lastmod>
+    <lastmod>2018-07-21T04:05:25-06:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -131,7 +146,7 @@
   
   <url>
     <loc>http://vbalnt.github.io/</loc>
-    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-21T04:05:25-06:00</lastmod>
     <priority>0</priority>
   </url>
   
