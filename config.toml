@@ -1,4 +1,5 @@
-baseurl             = "http://http://vbalnt.github.io/"
+baseurl             = "http://vbalnt.github.io/"
+builddrafts         = false
 canonifyurls        = true
 contentdir          = "content"
 languageCode        = "en-US"
@@ -19,8 +20,7 @@ blog  = "blog/:slug/"
 name                   = "Home"
 weight                 = -400
 identifier             = ""
-url                    = "/"
-
+url                    = ""
 
 [[menu.main]]
 name                   = "Publications"
