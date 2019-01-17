@@ -6,15 +6,42 @@
     <description>Recent content in News on Vassileios Balntas</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sat, 21 Jul 2018 04:05:25 -0600</lastBuildDate>
+    <lastBuildDate>Sat, 22 Dec 2018 04:05:25 -0600</lastBuildDate>
     
 	<atom:link href="http://vbalnt.github.io/news/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>I have moved to Scape Technologies as Research Team Lead</title>
+      <title>Co-organising a workshop on Image Matching at CVPR 2019</title>
+      <link>http://vbalnt.github.io/news/cvpr-2019-local-features/</link>
+      <pubDate>Sat, 22 Dec 2018 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/cvpr-2019-local-features/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Co-organising a workshop on Long-Term Visual Localization at CVPR 2019</title>
+      <link>http://vbalnt.github.io/news/cvpr-2019-localisation/</link>
+      <pubDate>Fri, 21 Dec 2018 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/cvpr-2019-localisation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>I will be giving a tutorial on local features at WACV 2019</title>
+      <link>http://vbalnt.github.io/news/wacv-tutorial/</link>
+      <pubDate>Wed, 21 Nov 2018 04:05:25 -0600</pubDate>
+      
+      <guid>http://vbalnt.github.io/news/wacv-tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Moving to Scape Technologies as Research Team Lead</title>
       <link>http://vbalnt.github.io/news/move_scape/</link>
-      <pubDate>Sat, 21 Jul 2018 04:05:25 -0600</pubDate>
+      <pubDate>Tue, 21 Aug 2018 04:05:25 -0600</pubDate>
       
       <guid>http://vbalnt.github.io/news/move_scape/</guid>
       <description></description>
@@ -93,7 +120,7 @@
     </item>
     
     <item>
-      <title>Code for our efficient TFeat descriptor from BMVC 2016 is now on github</title>
+      <title>Code for our TFeat descriptor from BMVC 2016 is now on github</title>
       <link>http://vbalnt.github.io/news/tfeat-code16/</link>
       <pubDate>Thu, 21 Jan 2016 04:05:25 -0600</pubDate>
       
@@ -102,7 +129,7 @@
     </item>
     
     <item>
-      <title>Code for our binary online learned descriptor from CVPR 2015 is now on github</title>
+      <title>Code for our BOLD descriptor from CVPR 2015 is now on github</title>
       <link>http://vbalnt.github.io/news/bold-code/</link>
       <pubDate>Tue, 21 Jul 2015 04:05:25 -0600</pubDate>
       

@@ -1,9 +1,20 @@
 /* override css styles of the main theme here */
 
+a {
+  color: #009968;
+  -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+a:hover {
+  color: #145C4C;
+}
 
 .btn-primary.btn-outline {
-  color: #428bca;
-  border-color: #428bca;
+  color: #009968;
+  border-color: #009968;
   background-color: transparent;
 }
 
@@ -45,7 +56,7 @@
     font-size: 1rem;
     font-weight: 3500;
     color: #222;
-    margin-top: 1.5rem;	      
+    margin-top: 1.5rem;
 }
 
 /* Stuff related to the publications list */
@@ -88,16 +99,15 @@ pre {
 
 news-date{
  font-size: 0.8rem;
- font-weight: 400;
+ font-weight: 300;
  font-family: 'Inconsolata', monospace;
  text-align: left;
-
 }
 
 news{
  font-size: 0.96rem;
- font-weight: 400;
- font-family: 'Inconsolata', monospace;
+ /* font-weight: 100; */
+ font-family: 'Open Sans';
 }
 
 section.main .container .content .post-item .meta-news {
