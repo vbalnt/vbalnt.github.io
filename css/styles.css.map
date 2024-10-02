@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/home/vasileios/code/websites/vbalnt@github",
+	"sourceRoot": "/home/vasileios/code/websites/private_vbalnt",
 	"sources": [
 		"themes/cactus/assets/scss/style.scss",
 		"themes/cactus/assets/scss/_variables.scss",
