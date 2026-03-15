@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reinforcement-Learning on Vasileios Balntas (vbalnt)</title>
+    <link>http://localhost:34659/tags/reinforcement-learning/</link>
+    <description>Recent content in Reinforcement-Learning on Vasileios Balntas (vbalnt)</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Vasileios Balntas</copyright>
+    <lastBuildDate>Thu, 13 Nov 2025 16:02:59 +0200</lastBuildDate>
+    <atom:link href="http://localhost:34659/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building a Mini Chess Engine with AlphaZero-Style Self-Play</title>
+      <link>http://localhost:34659/posts/mini-chess-engine-alphazero/</link>
+      <pubDate>Thu, 13 Nov 2025 16:02:59 +0200</pubDate>
+      <guid>http://localhost:34659/posts/mini-chess-engine-alphazero/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;AlphaZero revolutionized game AI by learning chess, shogi, and Go entirely through self-play, with no human game data. This post explores building a simplified version of this approach for chess.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-alphazero-approach&#34;&gt;The AlphaZero Approach&lt;/h2&gt;&#xA;&lt;p&gt;Brief overview:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Monte Carlo Tree Search (MCTS) guided by neural networks&lt;/li&gt;&#xA;&lt;li&gt;Self-play reinforcement learning&lt;/li&gt;&#xA;&lt;li&gt;Policy and value networks combined&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;architecture&#34;&gt;Architecture&lt;/h2&gt;&#xA;&lt;h3 id=&#34;neural-network-design&#34;&gt;Neural Network Design&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Input representation (board state)&lt;/li&gt;&#xA;&lt;li&gt;Policy head (move probabilities)&lt;/li&gt;&#xA;&lt;li&gt;Value head (position evaluation)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;mcts-integration&#34;&gt;MCTS Integration&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Selection&lt;/li&gt;&#xA;&lt;li&gt;Expansion&lt;/li&gt;&#xA;&lt;li&gt;Simulation&lt;/li&gt;&#xA;&lt;li&gt;Backpropagation&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;&#xA;&lt;h3 id=&#34;key-components&#34;&gt;Key Components&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Chess environment&lt;/li&gt;&#xA;&lt;li&gt;Neural network model&lt;/li&gt;&#xA;&lt;li&gt;MCTS search&lt;/li&gt;&#xA;&lt;li&gt;Self-play loop&lt;/li&gt;&#xA;&lt;li&gt;Training pipeline&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;simplifications&#34;&gt;Simplifications&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Smaller board representations&lt;/li&gt;&#xA;&lt;li&gt;Reduced network capacity&lt;/li&gt;&#xA;&lt;li&gt;Limited search depth&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;&#xA;&lt;h2 id=&#34;lessons-learned&#34;&gt;Lessons Learned&lt;/h2&gt;&#xA;&lt;h2 id=&#34;future-work&#34;&gt;Future Work&lt;/h2&gt;&#xA;&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Silver, D., et al. (2017). Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

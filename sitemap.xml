@@ -2,16 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://vbalnt.github.io/about/</loc>
-    <lastmod>2016-08-24T17:51:42+00:00</lastmod>
+    <loc>https://vbalnt.github.io/</loc>
+    <lastmod>2025-03-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://vbalnt.github.io/bio/</loc>
-    <lastmod>2016-08-24T17:51:42+00:00</lastmod>
+    <loc>https://vbalnt.github.io/posts/</loc>
+    <lastmod>2025-03-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vbalnt.github.io/posts/when-to-pick-grapes-brix-sampling/</loc>
+    <lastmod>2025-03-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vbalnt.github.io/posts/linear-b-decipherment/</loc>
+    <lastmod>2025-02-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vbalnt.github.io/posts/science-of-extra-virgin-olive-oil/</loc>
+    <lastmod>2025-01-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://vbalnt.github.io/about/</loc>
   </url><url>
     <loc>https://vbalnt.github.io/categories/</loc>
   </url><url>
     <loc>https://vbalnt.github.io/tags/</loc>
-  </url><url>
-    <loc>https://vbalnt.github.io/</loc>
   </url>
 </urlset>

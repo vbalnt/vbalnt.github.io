@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Physics on Vasileios Balntas (vbalnt)</title>
+    <link>http://localhost:1313/tags/physics/</link>
+    <description>Recent content in Physics on Vasileios Balntas (vbalnt)</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/physics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why is the Sky Blue?</title>
+      <link>http://localhost:1313/posts/why-is-the-sky-blue-the-real-answer/</link>
+      <pubDate>Wed, 25 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/why-is-the-sky-blue-the-real-answer/</guid>
+      <description>&lt;p&gt;&amp;#34;Because of Rayleigh scattering&amp;#34; is technically correct but&#xA;unsatisfying. Let&amp;#39;s actually understand &lt;em&gt;why&lt;/em&gt; small particles scatter&#xA;blue light more than red and why sunsets are orange.&lt;/p&gt;&#xA;&lt;nav&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-1&#34;&gt;The Setup&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-2&#34;&gt;Rayleigh Scattering: The λ⁻⁴ Law&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-3&#34;&gt;But Why λ⁻⁴?&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-4&#34;&gt;Why Not Violet?&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-5&#34;&gt;Why Sunsets Are Red&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-6&#34;&gt;Simulating the Sky&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-7&#34;&gt;Other Atmospheres&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#headline-8&#34;&gt;References&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/nav&gt;&#xA;&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;&#xA;&lt;h2 id=&#34;headline-1&#34;&gt;&#xA;The Setup&#xA;&lt;/h2&gt;&#xA;&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;&#xA;&lt;p&gt;&#xA;Sunlight contains all visible wavelengths. The atmosphere is made of&#xA;molecules (mostly N₂ and O₂) which are much smaller than the&#xA;wavelength of light (~500 nm vs ~0.1–0.3 nm molecules).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

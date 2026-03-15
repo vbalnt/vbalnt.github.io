@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Growing Trees with Grammar: An Introduction to L-Systems | Vasileios Balntas (vbalnt)</title>
+  <link rel = 'canonical' href = 'http://localhost:1313/posts/l-systems-grow-tree-with-grammar/'>
+  <meta name="description" content="[Olive oil maker](https://www.phaos.farm). [Robotics researcher](https://scholar.google.com/citations?user=AGoNHcsAAAAJ&amp;hl=en).">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:url" content="http://localhost:1313/posts/l-systems-grow-tree-with-grammar/">
+  <meta property="og:site_name" content="Vasileios Balntas (vbalnt)">
+  <meta property="og:title" content="Growing Trees with Grammar: An Introduction to L-Systems">
+  <meta property="og:description" content="Nature is full of self-similar patterns. The branching of trees, the spiral of shells, the fractal coastlines. In 1968, botanist Aristid Lindenmayer discovered a beautiful way to describe these patterns using simple string rewriting rules. These L-systems (Lindenmayer systems) can generate stunningly complex structures from minimal rules.
+L-Systems are rewriting systems.
+A rewriting system is a formal method where you repeatedly replace parts of a structure according to a fixed set of rules. Think of it like a find-and-replace that runs forever: start with a simple seed, apply the rules, and watch complexity emerge. L-systems apply this idea to strings of symbols, which we then interpret as drawing instructions.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-24T00:00:00+00:00">
+    <meta property="article:tag" content="Computer Science">
+    <meta property="article:tag" content="Maths">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Growing Trees with Grammar: An Introduction to L-Systems">
+  <meta name="twitter:description" content="Nature is full of self-similar patterns. The branching of trees, the spiral of shells, the fractal coastlines. In 1968, botanist Aristid Lindenmayer discovered a beautiful way to describe these patterns using simple string rewriting rules. These L-systems (Lindenmayer systems) can generate stunningly complex structures from minimal rules.
+L-Systems are rewriting systems.
+A rewriting system is a formal method where you repeatedly replace parts of a structure according to a fixed set of rules. Think of it like a find-and-replace that runs forever: start with a simple seed, apply the rules, and watch complexity emerge. L-systems apply this idea to strings of symbols, which we then interpret as drawing instructions.">
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="http://localhost:1313/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q==">
+
+  
+   <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">  <link rel="stylesheet" href="http://localhost:1313/css/custom.css"> 
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◼</text></svg>">
+
+  
+  
+  
+  
+  <script src="/js/code-collapse.js"></script>
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <header id="header">
+  <a href="http://localhost:1313/">
+  <div id="title">
+    <h1><span class="logo-symbol"><svg viewBox="0 0 100 115" xmlns="http://www.w3.org/2000/svg">
+      
+      <defs>
+        <linearGradient id="nablaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a5f7a"/>
+          <stop offset="50%" style="stop-color:#247d9e"/>
+          <stop offset="100%" style="stop-color:#a0522d"/>
+        </linearGradient>
+      </defs>
+      
+      <line x1="25" y1="8" x2="75" y2="8" stroke="#1a5f7a" stroke-width="5" stroke-linecap="round"/>
+      <polyline points="65,2 75,8 65,14" fill="none" stroke="#1a5f7a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <polygon points="50,110 5,30 95,30" fill="none" stroke="url(#nablaGrad)" stroke-width="8" stroke-linejoin="round"/>
+    </svg></span> Vasileios Balntas (vbalnt)</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts">Notes</a></li>
+      
+        <li><a href="https://scholar.google.com/citations?user=AGoNHcsAAAAJ&amp;hl=en">Papers</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+  <div class="post-container">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <header>
+        <h1 class="posttitle" itemprop="name headline">
+          Growing Trees with Grammar: An Introduction to L-Systems
+        </h1>
+        <div class="post-tags"><span class="tag-btn">computer science</span><span class="tag-btn">maths</span></div>
+      </header>
+
+      <div class="content" itemprop="articleBody">
+        
+<p>
+Nature is full of self-similar patterns. The branching of trees, the
+spiral of shells, the fractal coastlines. In 1968, botanist Aristid
+Lindenmayer discovered a beautiful way to describe these patterns
+using simple string rewriting rules. These <strong>L-systems</strong> (Lindenmayer
+systems) can generate stunningly complex structures from minimal
+rules.</p>
+<p>
+L-Systems are rewriting systems.</p>
+<p>
+A <strong>rewriting system</strong> is a formal method where you repeatedly replace
+parts of a structure according to a fixed set of rules. Think of it
+like a find-and-replace that runs forever: start with a simple seed,
+apply the rules, and watch complexity emerge. L-systems apply this
+idea to strings of symbols, which we then interpret as drawing
+instructions.</p>
+<nav>
+<ul>
+<li><a href="#headline-1">The Core Idea: String Rewriting</a>
+</li>
+<li><a href="#headline-2">Turtle Graphics Interpretation</a>
+</li>
+<li><a href="#headline-3">Classic Examples</a>
+<ul>
+<li><a href="#headline-4">Koch Curve</a>
+</li>
+<li><a href="#headline-5">Variations: Tiny Changes, Huge Differences</a>
+</li>
+<li><a href="#headline-9">Sierpinski Triangle</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-10">Branching Structures: Plants!</a>
+<ul>
+<li><a href="#headline-11">Understanding the Stack</a>
+</li>
+<li><a href="#headline-12">The Two-Symbol Trick</a>
+</li>
+<li><a href="#headline-13">Fractal Plant</a>
+</li>
+<li><a href="#headline-14">Organic Tree</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-15">Adding Variation: Stochastic L-Systems</a>
+</li>
+<li><a href="#headline-16">Going 3D</a>
+<ul>
+<li><a href="#headline-17">3D Turtle Graphics</a>
+</li>
+<li><a href="#headline-18">Mesh Generation</a>
+</li>
+<li><a href="#headline-19">Generating a 3D Tree</a>
+</li>
+<li><a href="#headline-20">Interactive 3D Viewer</a>
+</li>
+<li><a href="#headline-21">3D Bush</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-22">Tree Species Gallery</a>
+</li>
+<li><a href="#headline-23">References</a>
+</li>
+</ul>
+</nav>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+The Core Idea: String Rewriting
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>
+An L-system has three components:</p>
+<ol>
+<li><strong>Alphabet</strong>: symbols we use (e.g., <code class="verbatim">F</code>, <code class="verbatim">+</code>, <code class="verbatim">-</code>, <code class="verbatim">[</code>, <code class="verbatim">]</code>)</li>
+<li><strong>Axiom</strong>: the starting string</li>
+<li><strong>Rules</strong>: how to replace symbols in each iteration</li>
+</ol>
+<p>Let&#39;s start with the simplest example:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">apply_rules</span><span class="p">(</span><span class="n">axiom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rules</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Apply L-system rules for n iterations.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">current</span> <span class="o">=</span> <span class="n">axiom</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">current</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">current</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">current</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Simple example: Algae growth</span>
+</span></span><span class="line"><span class="cl"><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">apply_rules</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;n=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<pre class="example">
+n=0: A
+n=1: AB
+n=2: ABA
+n=3: ABAAB
+n=4: ABAABABA
+n=5: ABAABABAABAAB
+n=6: ABAABABAABAABABAABABA
+n=7: ABAABABAABAABABAABABAABAABABAABAAB
+</pre>
+<p>
+This produces the Fibonacci sequence in string length! Why? Each $A
+\to AB$ adds the previous count, and each $B \to A$ preserves it,
+giving us $L_n = L_{n-1} + L_{n-2}$ the Fibonacci recurrence.</p>
+<p>
+But how can we go from this to drawing  plants?
+We need to interpret these strings geometrically.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Turtle Graphics Interpretation
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>
+We can interpret symbols as commands for a &#34;turtle&#34; that draws as it
+moves:</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="verbatim">F</code></td>
+<td>Move forward, drawing a line</td>
+</tr>
+<tr>
+<td><code class="verbatim">+</code></td>
+<td>Turn right by angle θ</td>
+</tr>
+<tr>
+<td><code class="verbatim">-</code></td>
+<td>Turn left by angle θ</td>
+</tr>
+<tr>
+<td><code class="verbatim">[</code></td>
+<td>Save position &amp; angle (push to stack)</td>
+</tr>
+<tr>
+<td><code class="verbatim">]</code></td>
+<td>Restore position &amp; angle (pop)</td>
+</tr>
+</tbody>
+</table>
+<p>
+The <code class="verbatim">[</code> and <code class="verbatim">]</code> brackets are key for branching structures. They let the turtle &#34;remember&#34; where it was: save your position, draw a branch, then pop back to continue the main stem. Without this stack mechanism, you could only draw continuous paths—no forks, no trees.</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Turtle</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">90.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Turtle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">draw_lsystem</span><span class="p">(</span><span class="n">axiom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rules</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">angle</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">25.0</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Generate and draw an L-system.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">instructions</span> <span class="o">=</span> <span class="n">apply_rules</span><span class="p">(</span><span class="n">axiom</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">turtle</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">instructions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_x</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_y</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">-=</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">+=</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;[&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;]&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">_web</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">if</span> <span class="n">filename</span> <span class="k">else</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">draw_lsystem_fg</span><span class="p">(</span><span class="n">axiom</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;L-system where both F and G draw forward (for two-symbol systems).&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">instructions</span> <span class="o">=</span> <span class="n">apply_rules</span><span class="p">(</span><span class="n">axiom</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">turtle</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">instructions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="s1">&#39;FG&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_x</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_y</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">-=</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">+=</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">_web</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">if</span> <span class="n">filename</span> <span class="k">else</span> <span class="kc">None</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Classic Examples
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Koch Curve
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>
+A simple fractal that replaces each line segment with a bent version. The rule $F \to F+F\text{-}\text{-}F+F$ creates the classic Koch curve. Let&#39;s see how it evolves:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">configs</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;n=1&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;n=2&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;n=3&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;n=4&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">koch_rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;F+F--F+F&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">configs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">instructions</span> <span class="o">=</span> <span class="n">apply_rules</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">koch_rules</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">turtle</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">instructions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">angle</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">angle</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">),</span> <span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">-=</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">+=</span> <span class="n">angle</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">),</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="p">[</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="s1">&#39;koch-iterations.png&#39;</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">_web</span><span class="p">(</span><span class="s1">&#39;koch-iterations.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/koch-iterations.png" alt="/images/l-systems/koch-iterations.png" title="/images/l-systems/koch-iterations.png" /></p>
+<p>
+Each iteration replaces every line segment with the bent pattern—complexity grows exponentially. After 4 iterations, one <code class="verbatim">F</code> has become thousands of tiny segments.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Variations: Tiny Changes, Huge Differences
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>
+The magic of L-systems is that small rule tweaks create completely
+different fractals. Here are some classics:</p>
+<div id="outline-container-headline-6" class="outline-4">
+<h4 id="headline-6">
+Quadratic Koch (90°angles)
+</h4>
+<div id="outline-text-headline-6" class="outline-text-4">
+<p>
+Replace the 60° bends with right angles:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">draw_lsystem</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;F+F-F-F+F&#39;</span><span class="p">},</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quadratic Koch&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;quadratic-koch.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/quadratic-koch.png" alt="/images/l-systems/quadratic-koch.png" title="/images/l-systems/quadratic-koch.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-4">
+<h4 id="headline-7">
+Dragon Curve
+</h4>
+<div id="outline-text-headline-7" class="outline-text-4">
+<p>
+One of the most famous fractals - a single line that folds onto itself:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">draw_lsystem_fg</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;F+G&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="s1">&#39;F-G&#39;</span><span class="p">},</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Dragon Curve&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;dragon.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/dragon.png" alt="/images/l-systems/dragon.png" title="/images/l-systems/dragon.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-4">
+<h4 id="headline-8">
+Gosper Curve (Flowsnake)
+</h4>
+<div id="outline-text-headline-8" class="outline-text-4">
+<p>
+A hexagonal space-filling curve:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">draw_lsystem_fg</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;F-G--G+F++FF+G-&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="s1">&#39;+F-GG--G-F++F+G&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="n">iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Gosper Curve&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;gosper.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/gosper.png" alt="/images/l-systems/gosper.png" title="/images/l-systems/gosper.png" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+Sierpinski Triangle
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>
+Another classic - a triangle made of triangles:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sierpinski_rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;F-G+F+G-F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="s1">&#39;GG&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">draw_lsystem_fg</span><span class="p">(</span><span class="s1">&#39;F-G-G&#39;</span><span class="p">,</span> <span class="n">sierpinski_rules</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sierpinski Triangle&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;sierpinski.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/sierpinski.png" alt="/images/l-systems/sierpinski.png" title="/images/l-systems/sierpinski.png" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+Branching Structures: Plants!
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<p>
+To create plants, we need a way to:</p>
+<ol>
+<li>Save our current position and direction</li>
+<li>Draw a branch</li>
+<li>Return to where we were and continue</li>
+</ol>
+<p>This is exactly what <code class="verbatim">[</code> and <code class="verbatim">]</code> do:</p>
+<ul>
+<li><code class="verbatim">[</code> <strong>Push</strong>: Save current position and angle onto a stack (like dropping a breadcrumb)</li>
+<li><code class="verbatim">]</code> <strong>Pop</strong>: Teleport back to the last saved position (pick up the breadcrumb)</li>
+</ul>
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+Understanding the Stack
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<p>
+Think of it like this:</p>
+<pre class="example">
+F[+F]F means:
+  F     → draw forward
+  [     → remember where I am
+  +F    → turn right, draw forward (a branch)
+  ]     → teleport back to saved position
+  F     → draw forward (continuing the trunk)
+</pre>
+<p>
+The branch goes off to the side, but then we return to continue the
+main stem. Nest these brackets and you get trees.</p>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
+The Two-Symbol Trick
+</h3>
+<div id="outline-text-headline-12" class="outline-text-3">
+<p>
+Notice the plant rules use both <code class="verbatim">F</code> and <code class="verbatim">X</code>:</p>
+<pre class="example">
+F → FF        (segments double in length)
+X → F-[[X]+X]+F[+FX]-X
+</pre>
+<p>
+<code class="verbatim">X</code> is a <strong>growth point</strong>, a bud waiting to become a branch. The turtle
+ignores it when drawing, but the rewriting rules replace each <code class="verbatim">X</code> with a
+pattern containing new <code class="verbatim">X</code> symbols. Think of it like a plant: the tip of
+each branch contains cells that will become new branches. <code class="verbatim">F</code> is the
+woody stem (it draws), <code class="verbatim">X</code> is the meristem (it grows).</p>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
+Fractal Plant
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">plant_rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F-[[X]+X]+F[+FX]-X&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">draw_lsystem</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">plant_rules</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Fractal Plant&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;plant.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/plant.png" alt="/images/l-systems/plant.png" title="/images/l-systems/plant.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
+Organic Tree
+</h3>
+<div id="outline-text-headline-14" class="outline-text-3">
+<p>
+This rule creates branches on both sides simultaneously:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tree_rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF+[+F-F-F]-[-F+F+F]&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">draw_lsystem</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">tree_rules</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">22.5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Organic Tree&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;tree.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/tree.png" alt="/images/l-systems/tree.png" title="/images/l-systems/tree.png" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-15" class="outline-2">
+<h2 id="headline-15">
+Adding Variation: Stochastic L-Systems
+</h2>
+<div id="outline-text-headline-15" class="outline-text-2">
+<p>
+Real trees aren&#39;t perfectly symmetric. We can add randomness by
+perturbing the angle at each turn—instead of exactly $25°$, we use
+$25° \pm \epsilon$ where $\epsilon$ is a small random value. Same
+grammar, but each rendering looks slightly different.</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">draw_stochastic</span><span class="p">(</span><span class="n">axiom</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">angle_var</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">step_var</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Draw L-system with random variations.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">instructions</span> <span class="o">=</span> <span class="n">apply_rules</span><span class="p">(</span><span class="n">axiom</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">turtle</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">depths</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">instructions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">=</span> <span class="n">step</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">step_var</span><span class="p">,</span> <span class="n">step_var</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_x</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_y</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">depths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">a</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">angle_var</span><span class="p">,</span> <span class="n">angle_var</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">-=</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">a</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">angle_var</span><span class="p">,</span> <span class="n">angle_var</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">+=</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;[&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">turtle</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">depth</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;]&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="p">,</span> <span class="n">depth</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">depths</span><span class="p">)</span> <span class="k">if</span> <span class="n">depths</span> <span class="k">else</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)),</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">depths</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lw</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mf">0.3</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.3</span> <span class="o">+</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#f5f5dc&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ax</span></span></span></code></pre></div>
+</div>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">organic_rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF+[+F-F-F]-[-F+F+F]&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#f5f5dc&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">draw_stochastic</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">organic_rules</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">angle</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">angle_var</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">step_var</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">seed</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">42</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Stochastic Variations&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="s1">&#39;stochastic.png&#39;</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#f5f5dc&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">_web</span><span class="p">(</span><span class="s1">&#39;stochastic.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/stochastic.png" alt="/images/l-systems/stochastic.png" title="/images/l-systems/stochastic.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-2">
+<h2 id="headline-16">
+Going 3D
+</h2>
+<div id="outline-text-headline-16" class="outline-text-2">
+<p>
+2D trees are beautiful, but real trees grow in 3D space. Let&#39;s extend our turtle to three dimensions!</p>
+<div id="outline-container-headline-17" class="outline-3">
+<h3 id="headline-17">
+3D Turtle Graphics
+</h3>
+<div id="outline-text-headline-17" class="outline-text-3">
+<p>
+In 3D, our turtle needs orientation in space. We use three vectors:</p>
+<ul>
+<li><strong>Heading (H)</strong>: where the turtle points</li>
+<li><strong>Left (L)</strong>: perpendicular to heading</li>
+<li><strong>Up (U)</strong>: perpendicular to both</li>
+</ul>
+<p>New symbols for 3D rotations:</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="verbatim">&amp;</code></td>
+<td>Pitch down</td>
+</tr>
+<tr>
+<td><code class="verbatim">^</code></td>
+<td>Pitch up</td>
+</tr>
+<tr>
+<td><code class="verbatim">\</code></td>
+<td>Roll left</td>
+</tr>
+<tr>
+<td><code class="verbatim">/</code></td>
+<td>Roll right</td>
+</tr>
+<tr>
+<td><code class="verbatim">+</code></td>
+<td>Turn right (yaw)</td>
+</tr>
+<tr>
+<td><code class="verbatim">-</code></td>
+<td>Turn left (yaw)</td>
+</tr>
+</tbody>
+</table>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">trimesh</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Turtle3D</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;3D turtle with position and orientation.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pos</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="n">heading</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="n">left</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="n">up</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heading</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">heading</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>  <span class="c1"># +Z is up</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Turtle3D</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">heading</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">heading</span> <span class="o">*</span> <span class="n">distance</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">angle_deg</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle_deg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">rotate_vec</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">v</span> <span class="o">*</span> <span class="n">c</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="n">k</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">heading</span> <span class="o">=</span> <span class="n">rotate_vec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heading</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">rotate_vec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="n">rotate_vec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">yaw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">pitch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">roll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heading</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_3d_lsystem</span><span class="p">(</span><span class="n">axiom</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Generate 3D L-system, return list of (start, end, depth) segments.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">instructions</span> <span class="o">=</span> <span class="n">apply_rules</span><span class="p">(</span><span class="n">axiom</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">turtle</span> <span class="o">=</span> <span class="n">Turtle3D</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">instructions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">depth</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">yaw</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">yaw</span><span class="p">(</span><span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">pitch</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;^&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">pitch</span><span class="p">(</span><span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;[&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">turtle</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">depth</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;]&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="p">,</span> <span class="n">depth</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">segments</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-18" class="outline-3">
+<h3 id="headline-18">
+Mesh Generation
+</h3>
+<div id="outline-text-headline-18" class="outline-text-3">
+<p>
+Turn line segments into 3D cylinders. Thicker at trunk, thinner at tips:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_branch_mesh</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">segments</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Create a cylinder mesh between two points.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">direction</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+</span></span><span class="line"><span class="cl">    <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">cylinder</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">creation</span><span class="o">.</span><span class="n">cylinder</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">sections</span><span class="o">=</span><span class="n">segments</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">direction_norm</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">/</span> <span class="n">length</span>
+</span></span><span class="line"><span class="cl">    <span class="n">z_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">direction_norm</span><span class="p">,</span> <span class="n">z_axis</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">direction_norm</span><span class="p">,</span> <span class="o">-</span><span class="n">z_axis</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">transformations</span><span class="o">.</span><span class="n">rotation_matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">z_axis</span><span class="p">,</span> <span class="n">direction_norm</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">z_axis</span><span class="p">,</span> <span class="n">direction_norm</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">transformations</span><span class="o">.</span><span class="n">rotation_matrix</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">translation</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">transformations</span><span class="o">.</span><span class="n">translation_matrix</span><span class="p">(</span><span class="n">center</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">cylinder</span><span class="o">.</span><span class="n">apply_transform</span><span class="p">(</span><span class="n">rotation_matrix</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cylinder</span><span class="o">.</span><span class="n">apply_transform</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">cylinder</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">lsystem_to_mesh</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">base_radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">taper</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Convert L-system segments to a combined mesh.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">meshes</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">d</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">)</span> <span class="k">if</span> <span class="n">segments</span> <span class="k">else</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">depth</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">radius</span> <span class="o">=</span> <span class="n">base_radius</span> <span class="o">*</span> <span class="p">(</span><span class="n">taper</span> <span class="o">**</span> <span class="n">depth</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mesh</span> <span class="o">=</span> <span class="n">create_branch_mesh</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">mesh</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">t</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mi">80</span> <span class="o">+</span> <span class="mi">40</span><span class="o">*</span><span class="n">t</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="mi">150</span><span class="o">*</span><span class="n">t</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="mi">255</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mesh</span><span class="o">.</span><span class="n">visual</span><span class="o">.</span><span class="n">vertex_colors</span> <span class="o">=</span> <span class="n">color</span>
+</span></span><span class="line"><span class="cl">            <span class="n">meshes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">meshes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">None</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-19" class="outline-3">
+<h3 id="headline-19">
+Generating a 3D Tree
+</h3>
+<div id="outline-text-headline-19" class="outline-text-3">
+<p>
+A 3D tree with pitch variations for natural branching:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tree_3d_rules</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F[&amp;+X][&amp;-X][^X]&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">segments</span> <span class="o">=</span> <span class="n">generate_3d_lsystem</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">tree_3d_rules</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mesh</span> <span class="o">=</span> <span class="n">lsystem_to_mesh</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">base_radius</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">taper</span><span class="o">=</span><span class="mf">0.72</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mesh</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="s1">&#39;tree-3d.glb&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">_web</span><span class="p">(</span><span class="s1">&#39;tree-3d.glb&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><a href=""></a></p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 3D preview as 2D image</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">max_depth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">d</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">depth</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.3</span> <span class="o">+</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lw</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.75</span> <span class="o">**</span> <span class="n">depth</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">start</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set_box_aspect</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">azim</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="s1">&#39;tree-3d-preview.png&#39;</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">_web</span><span class="p">(</span><span class="s1">&#39;tree-3d-preview.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><a href=""></a></p>
+</div>
+</div>
+<div id="outline-container-headline-20" class="outline-3">
+<h3 id="headline-20">
+Interactive 3D Viewer
+</h3>
+<div id="outline-text-headline-20" class="outline-text-3">
+<p>
+Rotate and zoom with mouse/touch:</p>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<model-viewer
+  src="/images/l-systems/tree-3d.glb"
+  alt="3D L-System Tree"
+  auto-rotate
+  camera-controls
+  shadow-intensity="1"
+  style="width: 100%; height: 500px; background-color: #f5f5dc;">
+</model-viewer>
+</div>
+</div>
+<div id="outline-container-headline-21" class="outline-3">
+<h3 id="headline-21">
+3D Bush
+</h3>
+<div id="outline-text-headline-21" class="outline-text-3">
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">bush_rules</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F[-X][+X][&amp;X][^X]&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">segments</span> <span class="o">=</span> <span class="n">generate_3d_lsystem</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">bush_rules</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mesh</span> <span class="o">=</span> <span class="n">lsystem_to_mesh</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">base_radius</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">taper</span><span class="o">=</span><span class="mf">0.78</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mesh</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="s1">&#39;bush-3d.glb&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">_web</span><span class="p">(</span><span class="s1">&#39;bush-3d.glb&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><a href=""></a></p>
+<model-viewer
+  src="/images/l-systems/bush-3d.glb"
+  alt="3D L-System Bush"
+  auto-rotate
+  camera-controls
+  shadow-intensity="1"
+  style="width: 100%; height: 500px; background-color: #f5f5dc;">
+</model-viewer>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-22" class="outline-2">
+<h2 id="headline-22">
+Tree Species Gallery
+</h2>
+<div id="outline-text-headline-22" class="outline-text-2">
+<p>
+Different branching patterns create distinct tree silhouettes. By adjusting the L-system rules and parameters, we can mimic various species:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Define tree species with distinct characteristics</span>
+</span></span><span class="line"><span class="cl"><span class="n">TREE_SPECIES</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;oak&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;axiom&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rules&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F[+X]F[-X]+X&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;angle&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Broad, spreading crown&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;pine&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;axiom&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rules&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F[+X][-X]FX&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;angle&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Conical, layered branches&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;willow&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;axiom&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rules&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F-[[X]+X]+F[+FX]-X&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;angle&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Drooping, flowing branches&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;baobab&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;axiom&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rules&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FFF&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F[+X][-X]F[+X][-X]&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;angle&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Thick trunk, wide crown&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;cypress&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;axiom&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rules&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;FF&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F[+X]F[-X]FX&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;angle&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Tall, columnar shape&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;bonsai&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;axiom&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rules&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;F[-X][+X]&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;angle&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Compact, windswept&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">draw_species</span><span class="p">(</span><span class="n">species_name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Draw a tree species with optional randomness.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">instructions</span> <span class="o">=</span> <span class="n">apply_rules</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;axiom&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;rules&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">turtle</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">depths</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">angle</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">instructions</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">step</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.85</span> <span class="o">**</span> <span class="n">depth</span><span class="p">)</span>  <span class="c1"># taper</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">turtle</span><span class="o">.</span><span class="n">angle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_x</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_y</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">depths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">turtle</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;+&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">-=</span> <span class="n">angle</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="o">.</span><span class="n">angle</span> <span class="o">+=</span> <span class="n">angle</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;[&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">turtle</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">depth</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;]&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turtle</span><span class="p">,</span> <span class="n">depth</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">depths</span><span class="p">)</span> <span class="k">if</span> <span class="n">depths</span> <span class="k">else</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)),</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">depths</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lw</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.7</span> <span class="o">**</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.35</span> <span class="o">+</span> <span class="mf">0.15</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.25</span> <span class="o">+</span> <span class="mf">0.35</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span> <span class="n">solid_capstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">species_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#f9f9f9&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">TREE_SPECIES</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">draw_species</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Tree Species Gallery&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">_img</span><span class="p">(</span><span class="s1">&#39;tree-species.png&#39;</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#f9f9f9&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">_web</span><span class="p">(</span><span class="s1">&#39;tree-species.png&#39;</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p><img src="/images/l-systems/tree-species.png" alt="/images/l-systems/tree-species.png" title="/images/l-systems/tree-species.png" /></p>
+<p>
+The key differences between species:</p>
+<table>
+<thead>
+<tr>
+<th>Species</th>
+<th>Angle</th>
+<th>Key Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Oak</td>
+<td>30°</td>
+<td>Broad spreading, <code class="verbatim">F[+X]F[-X]+X</code> adds asymmetry</td>
+</tr>
+<tr>
+<td>Pine</td>
+<td>25°</td>
+<td>Tight angles, <code class="verbatim">FX</code> at end creates central leader</td>
+</tr>
+<tr>
+<td>Willow</td>
+<td>35°</td>
+<td>Nested brackets <code class="verbatim">[[X]+X]</code> create drooping effect</td>
+</tr>
+<tr>
+<td>Baobab</td>
+<td>50°</td>
+<td>Very wide, <code class="verbatim">FFF</code> makes thick trunk</td>
+</tr>
+<tr>
+<td>Cypress</td>
+<td>12°</td>
+<td>Very tight angles create columnar shape</td>
+</tr>
+<tr>
+<td>Bonsai</td>
+<td>40°</td>
+<td>Simple rules + many iterations = fine detail</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-headline-23" class="outline-2">
+<h2 id="headline-23">
+References
+</h2>
+<div id="outline-text-headline-23" class="outline-text-2">
+<ul>
+<li>Lindenmayer, A. (1968). &#34;Mathematical models for cellular interactions in development&#34;</li>
+<li>Prusinkiewicz, P. &amp; Lindenmayer, A. (1990). <em>The Algorithmic Beauty of Plants</em> - <a href="http://algorithmicbotany.org/papers/#abop">free online</a></li>
+<li><a href="https://en.wikipedia.org/wiki/L-system">L-system on Wikipedia</a></li>
+</ul>
+</div>
+</div>
+
+      </div>
+    </article>
+
+    
+    <aside class="toc-sidebar">
+      <div class="toc-sticky">
+        <h4>Contents</h4>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">The Core Idea: String Rewriting</a>
+</li>
+<li><a href="#headline-2">Turtle Graphics Interpretation</a>
+</li>
+<li><a href="#headline-3">Classic Examples</a>
+<ul>
+<li><a href="#headline-4">Koch Curve</a>
+</li>
+<li><a href="#headline-5">Variations: Tiny Changes, Huge Differences</a>
+<ul>
+<li><a href="#headline-6">Quadratic Koch (90°angles)</a>
+</li>
+<li><a href="#headline-7">Dragon Curve</a>
+</li>
+<li><a href="#headline-8">Gosper Curve (Flowsnake)</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">Sierpinski Triangle</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-10">Branching Structures: Plants!</a>
+<ul>
+<li><a href="#headline-11">Understanding the Stack</a>
+</li>
+<li><a href="#headline-12">The Two-Symbol Trick</a>
+</li>
+<li><a href="#headline-13">Fractal Plant</a>
+</li>
+<li><a href="#headline-14">Organic Tree</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-15">Adding Variation: Stochastic L-Systems</a>
+</li>
+<li><a href="#headline-16">Going 3D</a>
+<ul>
+<li><a href="#headline-17">3D Turtle Graphics</a>
+</li>
+<li><a href="#headline-18">Mesh Generation</a>
+</li>
+<li><a href="#headline-19">Generating a 3D Tree</a>
+</li>
+<li><a href="#headline-20">Interactive 3D Viewer</a>
+</li>
+<li><a href="#headline-21">3D Bush</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-22">Tree Species Gallery</a>
+</li>
+<li><a href="#headline-23">References</a>
+</li>
+</ul>
+</nav>
+      </div>
+    </aside>
+    
+  </div>
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2026  Vasileios Balntas (vbalnt) 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">Notes</a></li>
+         
+        <li><a href="https://scholar.google.com/citations?user=AGoNHcsAAAAJ&amp;hl=en">Papers</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

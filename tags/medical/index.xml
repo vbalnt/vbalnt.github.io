@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Medical on Vasileios Balntas (vbalnt)</title>
+    <link>http://localhost:1313/tags/medical/</link>
+    <description>Recent content in Medical on Vasileios Balntas (vbalnt)</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/medical/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How MRI Actually Works</title>
+      <link>http://localhost:1313/posts/how-mri-actually-works/</link>
+      <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/how-mri-actually-works/</guid>
+      <description>&lt;p&gt;&#xA;You lie in a tube. Magnets hum. Radio waves pulse. Twenty minutes later, a doctor looks at a picture of your brain. How does a magnet take a photograph of soft tissue?&lt;/p&gt;&#xA;&lt;p&gt;&#xA;The answer involves nuclear physics, Fourier transforms, and a beautiful piece of signal processing. Let&amp;#39;s build an MRI from scratch.&lt;/p&gt;&#xA;&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;&#xA;&lt;h2 id=&#34;headline-1&#34;&gt;&#xA;The Nuclear Compass&#xA;&lt;/h2&gt;&#xA;&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;&#xA;&lt;p&gt;&#xA;Every hydrogen nucleus in your body is a tiny magnet—a proton with spin. Normally these spins point randomly, canceling out. But put them in a strong magnetic field (1.5-7 Tesla) and they align, like compass needles.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

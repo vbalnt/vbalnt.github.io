@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Maths on Vasileios Balntas (vbalnt)</title>
+    <link>http://localhost:1313/tags/maths/</link>
+    <description>Recent content in Maths on Vasileios Balntas (vbalnt)</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/maths/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Growing Trees with Grammar: An Introduction to L-Systems</title>
+      <link>http://localhost:1313/posts/l-systems-grow-tree-with-grammar/</link>
+      <pubDate>Tue, 24 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/l-systems-grow-tree-with-grammar/</guid>
+      <description>&lt;p&gt;&#xA;Nature is full of self-similar patterns. The branching of trees, the&#xA;spiral of shells, the fractal coastlines. In 1968, botanist Aristid&#xA;Lindenmayer discovered a beautiful way to describe these patterns&#xA;using simple string rewriting rules. These &lt;strong&gt;L-systems&lt;/strong&gt; (Lindenmayer&#xA;systems) can generate stunningly complex structures from minimal&#xA;rules.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;L-Systems are rewriting systems.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;A &lt;strong&gt;rewriting system&lt;/strong&gt; is a formal method where you repeatedly replace&#xA;parts of a structure according to a fixed set of rules. Think of it&#xA;like a find-and-replace that runs forever: start with a simple seed,&#xA;apply the rules, and watch complexity emerge. L-systems apply this&#xA;idea to strings of symbols, which we then interpret as drawing&#xA;instructions.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
