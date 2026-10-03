@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Thu, 03 Sep 2026 00:00:00 +0000</lastBuildDate>
+			<lastBuildDate>Sat, 03 Oct 2026 00:00:00 +0000</lastBuildDate>
 		
 			<atom:link href="https://vbalnt.github.io/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>The End of the Wage: AGI, UBI and Ownership</title>
+				<link>https://vbalnt.github.io/posts/the-end-of-the-wage/</link>
+				<pubDate>Sat, 03 Oct 2026 00:00:00 +0000</pubDate>
+				<guid>https://vbalnt.github.io/posts/the-end-of-the-wage/</guid>
+				<description>&lt;figure&gt;&#xA;&lt;img src=&#34;https://vbalnt.github.io/images/end-of-wage/cockaigne.jpg&#34; alt=&#34;/images/end-of-wage/cockaigne.jpg&#34; title=&#34;/images/end-of-wage/cockaigne.jpg&#34; /&gt;&lt;figcaption&gt;&#xA;Pieter Bruegel the Elder, &lt;em&gt;The Land of &lt;a href=&#34;https://en.wikipedia.org/wiki/Cockaigne&#34;&gt;Cockaigne&lt;/a&gt;&lt;/em&gt;, 1567. The medieval land of plenty, where food arrives on its own and nobody works. Alte Pinakothek, Munich.&#xA;&lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&lt;p&gt;&#xA;&lt;a href=&#34;https://openai.com/charter/&#34;&gt;OpenAI defines AGI&lt;/a&gt; as systems that&#xA;outperform humans at most economically valuable work. Suppose&#xA;that ambition extends to machines doing essentially all useful&#xA;work, including physical work, cheaply enough to replace most&#xA;paid labour. Assume they remain under human control, while the best&#xA;systems stay expensive to develop and help improve their own&#xA;successors. The politics of that future would depend on who owns&#xA;the machines and how widely their capabilities spread.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>The Always-On Glasses I Would Wear</title>
 				<link>https://vbalnt.github.io/posts/the-always-on-glasses-i-would-wear/</link>
